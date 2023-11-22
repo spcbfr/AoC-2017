@@ -1,6 +1,10 @@
 # Author: Yusuf Bouzekri
 # solution for Day 1 of Advent of Code 2017
 # Link to problem: https://adventofcode.com/2017/day/1
+import os
+
+cwd = os.getcwd()
+print(cwd)
 
 f = open("input.txt", "r")
 txt = f.read()
@@ -10,7 +14,7 @@ txt = f.read()
 # when given an index, if the given index
 # is out-of-range the function will loop
 # back and start from the first index
-def doura(index: int, list: list[int]):
+def congruent(index: int, list: list[int]):
     length = len(list)  # 5
     if index < length:
         return list[index]
@@ -19,17 +23,19 @@ def doura(index: int, list: list[int]):
 
 
 count = 0
-midway = int(len(txt) / 2)
-print(midway)
 
 # Refactored answer for the first half of the question
-# for index, value in enumerate(txt):
-#     if doura(index + 1, txt) == value:
-#         count = count + int(value)
+for index, value in enumerate(txt):
+    if congruent(index + 1, txt) == value:
+        count += int(value)
+print("First Half:", count)
 
+
+count = 0
+midway = int(len(txt) / 2)
 
 for index, value in enumerate(txt):
-    if doura(index + midway, txt) == value:
-        count = count + int(value)
+    if congruent(index + midway, txt) == value:
+        count += int(value)
 
-print(count)
+print("Second Half:", count)
